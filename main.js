@@ -1,18 +1,18 @@
-const {
-  app,
-  BrowserWindow
-} = require('electron')
+const {app} = require('electron')
 const isDev = require('electron-is-dev')
+const path = require('path')
+const AppWindow = require('./src/AppWindow')
+
 let mainWindow
 
 app.on('ready', () => {
-  mainWindow = new BrowserWindow({
-    width: 1024,
-    height: 680,
-    webPreferences: {
-      nodeIntegration: true
-    }
+  const mainWindowConfig = {
+    width: 800,
+    height: 600,
+  }
+  const urlLocation = isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, './index.html')}`
+  mainWindow = new AppWindow(mainWindowConfig, urlLocation)
+  mainWindow.on('closed', () => {
+    mainWindow = null
   })
-  const urlLocation = isDev ? 'http://localhost:3000' : 'tempurl'
-  mainWindow.loadURL(urlLocation)
 })
