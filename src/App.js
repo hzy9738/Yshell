@@ -1,9 +1,11 @@
 import './App.css'
+import React from 'react';
+import { Button } from 'antd';
 
 function App() {
     return (
-        <div>
-            init
+        <div className="App">
+            <Button type="primary">Button</Button>
         </div>
     );
 }
